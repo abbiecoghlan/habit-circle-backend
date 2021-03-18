@@ -1,6 +1,10 @@
 class ApplicationController < ActionController::API
     before_action :authorized
 
+    # def current_date
+    #     {day: Time.now.day, year: Time.now.year, month: Time.now.month}
+    # end 
+
     def encode_token(payload)
         JWT.encode(payload, 'app_s3cret')
     end 
