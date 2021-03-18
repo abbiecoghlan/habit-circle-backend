@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
   resources :progresses
   resources :days
-  resources :months
   resources :habits
   resources :users
 
