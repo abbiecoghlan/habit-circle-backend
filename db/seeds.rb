@@ -28,7 +28,6 @@ habit7  = Habit.create(name: "journal", user_id: user1.id)
 
 #CREATE DAYS FOR EACH DATE YTD
 (1..Time.now.month).each { |month| 
-
     (1..Time.days_in_month(month, Time.now.year)).each { |day| 
         Day.create(month: month, day: day, year: Time.now.year)
         }
@@ -42,4 +41,33 @@ Day.all.select { |day| day.month == Time.now.month && day.year == Time.now.year}
     }
 }
 
+# Day.all.select { |day| day.month == Time.now.month - 1 && day.year == Time.now.year}.each { |day| 
+#     Habit.all.each { |habit| 
+#         Progress.create(habit_id: habit.id, day_id: day.id, completed: false)
+#     }
+# }
 
+
+
+Progress.find_by(habit_id:8, day_id:154).update(completed: true)
+Progress.find_by(habit_id:9, day_id:154).update(completed: true)
+Progress.find_by(habit_id:10, day_id:154).update(completed: true)
+Progress.find_by(habit_id:11, day_id:154).update(completed: true)
+Progress.find_by(habit_id:12, day_id:154).update(completed: true)
+Progress.find_by(habit_id:13, day_id:154).update(completed: true)
+Progress.find_by(habit_id:14, day_id:154).update(completed: true)
+
+
+
+# Progress.find_by(habit_id:8, day_id:153).update(completed: true)
+# Progress.find_by(habit_id:9, day_id:153).update(completed: true)
+# Progress.find_by(habit_id:12, day_id:153).update(completed: true)
+# Progress.find_by(habit_id:14, day_id:153).update(completed: true)
+
+# Progress.find_by(habit_id:8, day_id:155).update(completed: true)
+# Progress.find_by(habit_id:9, day_id:155).update(completed: true)
+# Progress.find_by(habit_id:10, day_id:155).update(completed: true)
+# Progress.find_by(habit_id:11, day_id:155).update(completed: true)
+# Progress.find_by(habit_id:12, day_id:155).update(completed: true)
+# Progress.find_by(habit_id:13, day_id:155).update(completed: true)
+# Progress.find_by(habit_id:14, day_id:155).update(completed: true)

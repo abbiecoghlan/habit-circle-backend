@@ -3,7 +3,7 @@ class ProgressesController < ApplicationController
 
     def user_info
         user = User.find_by(id: params[:id])
-        progresses = user.progresses.select {|p| p.habit.user.id == params[:id]} 
+        progresses = user.progresses.select {|p| p.habit.user.id == params[:id] && p.day.month == params[:currentMonth]} 
         render json: progresses
     end 
 
@@ -39,7 +39,7 @@ class ProgressesController < ApplicationController
 
 
     def progress_params
-        params.require(:progress).permit(:day_id, :habit_id) 
+        params.require(:progress).permit(:day_id, :habit_id, :completed) 
     end 
 
     #add strong params
