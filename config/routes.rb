@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   resources :users
 
   post '/login', to: 'auth#create'
-  get '/profile', to: 'users#profile'
+  get '/profile', to: 'auth#profile'
   post "/user_info", to: 'progresses#user_info'
 
   # post '/current_month', to: 'users#current_month'

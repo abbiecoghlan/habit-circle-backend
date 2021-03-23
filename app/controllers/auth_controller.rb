@@ -1,8 +1,7 @@
 class AuthController < ApplicationController
-    skip_before_action :authorized, only: [:create, :index, :show]
+    skip_before_action :authorized, only: [:create, :index, :show, :profile]
     
       def create
-
         @user = User.find_by(username: user_login_params[:username])
 
         #CHECK IF THE USER IS VALID
@@ -22,6 +21,16 @@ class AuthController < ApplicationController
         end
       end
     
+    def profile 
+      @user = current_user 
+      if @user
+        render json: { user: UserSerializer.new(@user) }, status: :accepted
+      else 
+        render json:{ message: "Unable to authorize user"}
+      end 
+    end   
+
+
       private
     
       def user_login_params

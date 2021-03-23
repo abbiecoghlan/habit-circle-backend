@@ -1,15 +1,16 @@
 class ProgressesController < ApplicationController
     skip_before_action :authorized, only: [:create, :index, :show, :update, :destroy, :user_info]
 
+    ## add in logic to include year query
     def user_info
         user = User.find_by(id: params[:id])
         progresses = user.progresses.select {|p| p.habit.user.id == params[:id] && p.day.month == params[:currentMonth]} 
+            
         render json: progresses
-    end 
+    end
 
     def index
         progresses = Progress.all
-
         render json: progresses
     end
 
@@ -19,8 +20,7 @@ class ProgressesController < ApplicationController
         render json: progress
     end
 
-    def create
-        
+    def create   
         progress = Progress.create(progress_params)
         progress.save
         # add validations
@@ -28,13 +28,13 @@ class ProgressesController < ApplicationController
     end
 
     def update
+        progress = Progress.find_by(id: params[:id])
+        if progress.update(progress_params)
+            render json: progress
+        else 
+            render json: { error: 'failed to edit habit' }, status: :not_acceptable
+        end 
 
-        progress = Progress.find_by(id: params['id'])
-        #possibly add conditional logic here to toggle the completed value
-        progress.status = params['completed']
-        progress.save
-
-        render json:progress
     end
 
 
