@@ -34,6 +34,23 @@ habit7  = Habit.create(name: "journal", user_id: user1.id)
 }
 
 
+
+#april 
+    (1..Time.days_in_month(4, Time.now.year)).each { |day| 
+        Day.create(month: 4, day: day, year: Time.now.year)
+        }
+
+#May
+    (1..Time.days_in_month(5, Time.now.year)).each { |day| 
+    Day.create(month: 5, day: day, year: Time.now.year)
+    }
+
+#June
+    (1..Time.days_in_month(6, Time.now.year)).each { |day| 
+    Day.create(month: 6, day: day, year: Time.now.year)
+    }
+
+
 #CREATE PROGRESS FOR EACH HABIT
 Day.all.select { |day| day.month == Time.now.month && day.year == Time.now.year}.each { |day| 
     Habit.all.each { |habit| 
