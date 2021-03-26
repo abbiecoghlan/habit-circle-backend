@@ -1,5 +1,5 @@
 class HabitsController < ApplicationController
-    skip_before_action :authorized, only: [:create, :index, :show, :update, :destroy]
+    skip_before_action :authorized, only: [:create, :index, :show, :update, :destroy, :create_month]
 
     def index
         habits = Habit.all
@@ -16,6 +16,23 @@ class HabitsController < ApplicationController
         # render json: { habit: HabitSerializer.new(habit)}, status: :created
         render json: habit
     end
+
+    def create_month
+        month = params[:habits].map{|habitName| 
+        existingHabit = Habit.find_by(name: habitName )
+        Habit.create(user_id: params[:user_id], name: habitName) 
+        }
+
+        month.each 
+        Day.all.select { |day| day.month == Time.now.month && day.year == Time.now.year}.each { |day| 
+            month.each { |habit| 
+                Progress.create(habit_id: habit.id, day_id: day.id, completed: false)
+                }
+                }
+        render json: month
+    end 
+
+    
 
     def update
         habit = Habit.find_by(id: params[:id])

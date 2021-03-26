@@ -1,7 +1,7 @@
 class UserSerializer < ActiveModel::Serializer
   attributes :id, :name, :username
   has_many :habits
-  # has_many :progresses, through: :habits
+  has_many :progresses, through: :habits
 
   # took progresses out of attributes
     # , :promises 
