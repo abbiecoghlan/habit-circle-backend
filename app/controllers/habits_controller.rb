@@ -19,20 +19,18 @@ class HabitsController < ApplicationController
 
     def create_month
         month = params[:habits].map{|habitName| 
-        existingHabit = Habit.find_by(name: habitName )
-        Habit.create(user_id: params[:user_id], name: habitName) 
+        Habit.find_or_create_by(name: habitName, user_id: params[:user_id])
         }
-
-        month.each 
-        Day.all.select { |day| day.month == Time.now.month && day.year == Time.now.year}.each { |day| 
-            month.each { |habit| 
-                Progress.create(habit_id: habit.id, day_id: day.id, completed: false)
-                }
-                }
-        render json: month
+        
+        progs = []
+        Day.all.select { |day| day.month == params[:month] && day.year == Time.now.year}.each { |day| 
+        month.each { |habit| 
+            @prog = Progress.create(habit_id: habit.id, day_id: day.id, completed: false)
+            progs << @prog
+            }
+            }                   
+        render json: progs
     end 
-
-    
 
     def update
         habit = Habit.find_by(id: params[:id])
