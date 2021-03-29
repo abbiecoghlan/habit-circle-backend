@@ -1,5 +1,5 @@
 class ProgressesController < ApplicationController
-    skip_before_action :authorized, only: [:create, :index, :show, :update, :destroy, :user_info]
+    skip_before_action :authorized, only: [:create, :index, :show, :update, :destroy, :user_info, :delete_by_habit]
 
     ## add in logic to include year query
     def user_info
@@ -43,6 +43,14 @@ class ProgressesController < ApplicationController
         end 
 
     end
+
+    def delete_by_habit
+        
+        user = User.find_by(id: params[:user_id])
+        user.progresses.select {|p| p.habit.id == params[:habit_id] && p.day.month == params[:currentMonth]}.map{ |p| p.destroy }
+        
+        render json: {message: "Your habit has been deleted"}
+    end 
 
 
     def progress_params

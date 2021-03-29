@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   get '/profile', to: 'auth#profile'
   post "/user_info", to: 'progresses#user_info'
   post "/create_month", to: 'habits#create_month'
+  post "/delete_by_habit", to: "progresses#delete_by_habit"
 
 
 
