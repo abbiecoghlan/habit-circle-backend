@@ -11,4 +11,6 @@ class UserSerializer < ActiveModel::Serializer
   def created
     object.created_at.month
   end 
+
+  
 end
