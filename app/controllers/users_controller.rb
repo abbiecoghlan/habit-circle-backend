@@ -31,11 +31,6 @@ class UsersController < ApplicationController
         end 
     end 
 
-    # def current_month
-    #   user = User.find_by(id: params[:id])
-    #   user.progresses.select {|p| p.day.month == Time.now.month && p.day.year == Time.now.year}
-    # end 
-
 
     def destroy
         user = User.find_by(id: params[:id])

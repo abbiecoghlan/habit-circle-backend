@@ -8,14 +8,5 @@ class ProgressSerializer < ActiveModel::Serializer
     object.habit.user.id
   end 
 
-  
 
-  # :day_num, :habit_name
-  # def day_num
-  #   object.day.day
-  # end 
-
-  # def habit_name
-  #   object.habit.name
-  # end 
 end

@@ -9,12 +9,6 @@ class ProgressesController < ApplicationController
         render json: progresses
     end
 
-    # def user_progress
-    #     user = User.find_by(id: params[:id])
-    #     progresses = user.progresses.select {|p| p.habit.user.id == params[:id]} 
-            
-    #     render json: progresses
-    # end
 
     def index
         progresses = Progress.all
